@@ -1,3 +1,3 @@
-# Articles
+# Zenn CLI
 
-This articles repo contains all the drafts of my articles on Medium and other platforms.
+- [📘 How to use](https://zenn.dev/zenn/articles/zenn-cli-guide)
