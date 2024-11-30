@@ -2,6 +2,10 @@
   "name": "articles",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "new": "bunx zenn new:article",
+    "preview": "bunx zenn preview"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
