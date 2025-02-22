@@ -3,16 +3,19 @@ title: "ViteアプリのPWA化"
 emoji: "📱"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["PWA", "Vite", "React", "JavaScript", "Browser"]
-published: false
+published: true
 ---
 
 # これは何
 
-## そもそも PWA って
+先日思い立って個人開発してるWebアプリをPWA化したので、その時に調べたことを諸々まとめてみました！
 
-ご存知の方も多いかもしれませんが、そもそも PWA って何なのという部分にさらっと触れておきます！
 
-- PWAはProgressive Web Application の略称
+## そもそもPWAって
+
+ご存知の方も多いかもしれませんが、そもそも PWAって何なのという部分にさらっと触れておきます！
+
+- PWAはProgressive Web Applicationの略称
 - Webサイト・アプリケーションをネイティブアプリのように使えるようにする仕組み
 - Service Worker、Web App Manifest といった技術を利用して、次のような機能がWebサイト・アプリケーションでも使えるようになります
   - ✅ アプリのインストール（アプリのようにホーム画面に追加できる）
@@ -33,7 +36,7 @@ JSON形式のmanifestファイルで、インストールされたアプリが�
 - `name`: インストールしたデバイス上で表示するアプリの名前
 - `icons`: インストールしたデバイス上で表示するアプリアイコン。192x192, 512x512はマストで用意する必要があります
 - `start_url`: インストールしたアプリをユーザーが起動した際に表示するページURL
-- `display`: インストールしたアプリがどのような見た目になるかの設定。`standalone`が一番一般的なネイティブアプリに近い見た目の表示になり、ブラウザ固有のナビゲーションバーとかが消える。`minimal-ui`はナビゲーションバーなどに必要最低限の要素を配置するレイアウト
+- `display`: インストールしたアプリがどのような見た目になるかの設定。`standalone`が一番一般的なネイティブアプリに近い見た目の表示になり、ブラウザ固有のナビゲーションバーとかが消える。
 - `prefer_related_applications`: PWAではないネイティブのアプリが存在し、そちらのダウンロードを推奨するかどうか
 
 ### HTTPS/localhost
@@ -43,7 +46,7 @@ PWAを有効にするには、ページがHTTPS、もしくはlocalhostで提供
 
 ### Service Worker
 
-⚠️PWAではoffline cacheなどの利用を可能にするService Workerを使用するケースが多いですが、Service Workerを利用すること自体はPWAとしてWebアプリをインストールできるようにする技術要件には含まれていません。
+⚠️ PWAではoffline cacheなどの利用を可能にするService Workerを使用するケースが多いですが、Service Workerを利用すること自体はPWAとしてWebアプリをインストールできるようにする技術要件には含まれていません。
 
 ## ViteアプリをPWA化する方法
 
@@ -112,6 +115,7 @@ export default defineConfig({
 
 ```
 - 追加でカスタマイズしたい場合は上記のように`VitePWA`の引数にオプションを指定してあげることで設定を変更することができます
+  - 前項で触れたmanifestにおける必須設定項目が上記の内容には含まれていませんが、これはプラグインがデフォルトで挿し込んでくれるためです
 - `VitePWA`に渡している引数の中に`devOptions`というプロパティがありますが、こちらを`{enabled: true}`でセットしてあげることで開発環境でも確認ができるようになります。
 - Viteアプリの場合ここで指定するアイコンは`public`ディレクトリに配置しておけば上記のようにsrcにファイル名を記述するだけでアイコンを指定することができます
 - 複数指定しているアイコンの一番最後にpurpose: "maskable"というプロパティを追加していますが、これはマスク可能なアイコンとして指定するための記述です。[マスク可能なアイコン](https://developer.mozilla.org/ja/docs/Web/Manifest#maskable_icon)とは何かについてはMDNの説明が参考になりますので、興味がある方はぜひご参照ください
